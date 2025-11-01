@@ -1,6 +1,7 @@
 import pandas as pd
 import dash
 from dash import dcc, html, Input, Output, State, callback
+import dash_bootstrap_components as dbc
 import plotly.express as px
 
 # Lecture du cache: données de prix SPOT réalisé France
@@ -22,12 +23,21 @@ spot_layout = html.Div(
         html.H2("Prix SPOT (France)"),
         html.Div(
             [
-                html.Button(
-                    "Dèrniere semaine", id="derniere-semaine-button", n_clicks=0
+                dbc.Button(
+                    "Dernière semaine",
+                    id="derniere-semaine-button",
+                    className="me-2",
+                    n_clicks=0,
                 ),
-                html.Button("Dernier mois", id="dernier-mois-button", n_clicks=0),
-            ]
+                dbc.Button(
+                    "Dernier mois",
+                    id="dernier-mois-button",
+                    n_clicks=0,
+                ),
+            ],
+            className="d-flex justify-content-start mt-2",
         ),
+
         dcc.DatePickerRange(
             id="date-picker-range",
             min_date_allowed=min_date,

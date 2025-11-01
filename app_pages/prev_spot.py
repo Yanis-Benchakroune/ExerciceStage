@@ -1,4 +1,5 @@
 from dash import dcc, html, Input, Output, callback, State, dash_table
+import dash_bootstrap_components as dbc
 import os
 import pandas as pd
 import pickle
@@ -78,7 +79,7 @@ prev_spot_layout = prev_spot_layout = html.Div(
                     end_date=date.today(),
                     display_format="DD/MM/YYYY",
                 ),
-                html.Button("Télécharger depuis l’API", id="api-download-button", n_clicks=0),
+                dbc.Button("Télécharger depuis l’API", id="api-download-button", n_clicks=0),
                 html.Div(id="api-download-status", style={"marginTop": "10px", "color": "green"}),
             ],
         ),
@@ -91,7 +92,7 @@ prev_spot_layout = prev_spot_layout = html.Div(
             options=[{"label": f, "value": f} for f in model_files if f != "scaler.pkl"],
             placeholder="Sélectionner un modèle",
         ),
-        html.Button("Lancer les prévisions", id="run-forecasts-button", n_clicks=0),
+        dbc.Button("Lancer les prévisions", id="run-forecasts-button", n_clicks=0),
 
         html.Div(
             dcc.Graph(id="forecast-graph"),

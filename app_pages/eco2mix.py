@@ -1,6 +1,7 @@
 import pandas as pd
 import dash
 from dash import dcc, html, Input, Output, State, callback
+import dash_bootstrap_components as dbc
 import plotly.express as px
 
 df = pd.read_csv("data/eCO2mix_RTE_En-cours-Consolide.csv", sep="\t", encoding="latin-1", index_col=False).iloc[:-1]
@@ -29,11 +30,19 @@ eco2mix_layout = html.Div(
         html.H2("Données éCO2mix (France)"),
         html.Div(
             [
-                html.Button(
-                    "Dernière semaine", id="derniere-semaine-button", n_clicks=0
+                dbc.Button(
+                    "Dernière semaine",
+                    id="derniere-semaine-button",
+                    className="me-2",
+                    n_clicks=0,
                 ),
-                html.Button("Dernier mois", id="dernier-mois-button", n_clicks=0),
-            ]
+                dbc.Button(
+                    "Dernier mois",
+                    id="dernier-mois-button",
+                    n_clicks=0,
+                ),
+            ],
+            className="d-flex justify-content-start mt-2",
         ),
 
         dcc.DatePickerRange(
