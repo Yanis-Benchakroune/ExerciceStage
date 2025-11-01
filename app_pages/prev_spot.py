@@ -252,7 +252,7 @@ def run_forecasts(n_clicks, model_filename, contents):
             model = pickle.load(file)
         with open("models/scaler.pkl", "rb") as file:
             scaler = pickle.load(file)
-        df = df.replace("ND", float("nan")).dropna()
+        df = df.replace("ND", float("nan")).dropna(subset=model.feature_names_in_)
         prediction_datetimes = pd.to_datetime(df.Date + " " + df.Heures)        
         df = df[model.feature_names_in_]
         try:
