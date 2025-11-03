@@ -169,7 +169,9 @@ def download_from_api(n_clicks, start_date, end_date):
             'hydraulique_step_turbinage': 'Hydraulique - STEP turbinage',
             'bioenergies_dechets': 'Bioénergies - Déchets',
             'bioenergies_biomasse': 'Bioénergies - Biomasse',
-            'bioenergies_biogaz': 'Bioénergies - Biogaz'
+            'bioenergies_biogaz': 'Bioénergies - Biogaz',
+            "stockage_batterie": " Stockage batterie",
+            "destockage_batterie": "Déstockage batterie"
         })
 
         csv_buffer = io.StringIO()
@@ -257,7 +259,8 @@ def run_forecasts(n_clicks, model_filename, contents):
         df = df[model.feature_names_in_]
         try:
             # TODO: exploiter `previsions_prix_spot`
-            df = scaler.transform(df)
+            if model_filename in ["linear_regressor.pkl", "random_forest_regressor.pkl"]:
+                df = scaler.transform(df)
             previsions_prix_spot = model.predict(df)
         except Exception as e:
             return html.Div([f"Erreur lors de l'exécution du modèle: {e}"])
